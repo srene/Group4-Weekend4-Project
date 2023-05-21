@@ -9,14 +9,14 @@ export default function InstructionsComponent() {
 		<div className={styles.container}>
 			<header className={styles.header_container}>
 				<h1>
-					My dapp
+					Tokenized ballot dapp
 				</h1>
 
 			</header>
 
 			<div className={styles.buttons_container}>
 				<PageBody></PageBody>
-				<ApiInfo></ApiInfo>
+				{/*<ApiInfo></ApiInfo>*/}
 				<RequestTokens></RequestTokens>
 			</div>
 			<div className={styles.footer}>
@@ -39,10 +39,37 @@ function WalletInfo(){
 	const { chain, chains } = useNetwork();
 	if(signer) return (
 		<>
+		<p><b>Wallet info</b></p>
 		<p>Your account address is {signer._address}</p>
 		<p>Connected to the {chain.name} network</p>
-		<button onClick={() => signMessage(signer,"I love potatoes")}>Sign</button>
+		{/*<button onClick={() => signMessage(signer,"I love potatoes")}>Sign</button>*/}
 		<WalletBalance></WalletBalance>
+		<button onClick={() => vote()}>Cast Vote</button>
+		<button onClick={() => delegate()}>Delegate Votes</button>
+		<button onClick={() => results()}>Query results</button>
+		</>
+	)
+	if(isLoading) return (
+		<>
+		<p>Wait a while, the wallet is loading</p>
+		</>	
+	)
+	return (
+		<>
+		<p>My wallet info</p>
+		</>
+	)
+}
+
+function Voting(){
+	const {data: signer, isError, isLoading } = useSigner();
+	const { chain, chains } = useNetwork();
+	if(signer) return (
+		<>
+		<p><b>Voting:</b></p>
+		<button onClick={() => vote()}>Cast Vote</button>
+		<button onClick={() => delegate()}>Delegate Votes</button>
+		<VoteResults></VoteResults>
 		</>
 	)
 	if(isLoading) return (
@@ -78,7 +105,11 @@ function WalletBalance(){
 	)
 }
 
-function signMessage(signer, message) {
+function VoteResults(){
+	
+}
+
+/*function signMessage(signer, message) {
 	signer.signMessage(message).then(
 		(response) => {console.log(response)},
 		(error) => {console.error(error)}
@@ -108,7 +139,7 @@ function ApiInfo() {
 		<p>{data.email}</p>
 	  </div>
 	);
-  }
+  }*/
   
   function RequestTokens() {
 	  const { data: signer } = useSigner();
