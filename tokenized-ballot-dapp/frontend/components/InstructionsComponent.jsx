@@ -164,7 +164,7 @@ function ApiInfo() {
 	setLoading(true);
 	const requestOptions = {
 		method: 'POST',
-		headers: { 'Content-type': 'applications/json'},
+		headers: { 'Content-type': 'application/json'},
 		body: JSON.stringify({ address: signer._address, signature: signature})
 	};
 	console.log(requestOptions)
