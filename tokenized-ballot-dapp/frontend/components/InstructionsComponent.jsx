@@ -17,10 +17,9 @@ export default function InstructionsComponent() {
 			<div className={styles.buttons_container}>
 				<PageBody></PageBody>
 				{/*<ApiInfo></ApiInfo>*/}
-				<RequestTokens></RequestTokens>
 			</div>
 			<div className={styles.footer}>
-				Footer
+				Group 4 - Weekend4 Project
 			</div>
 		</div>
 	);
@@ -44,9 +43,8 @@ function WalletInfo(){
 		<p>Connected to the {chain.name} network</p>
 		{/*<button onClick={() => signMessage(signer,"I love potatoes")}>Sign</button>*/}
 		<WalletBalance></WalletBalance>
-		<button onClick={() => vote()}>Cast Vote</button>
-		<button onClick={() => delegate()}>Delegate Votes</button>
-		<button onClick={() => results()}>Query results</button>
+		<Voting></Voting>
+		<RequestTokens></RequestTokens>
 		</>
 	)
 	if(isLoading) return (
@@ -56,7 +54,7 @@ function WalletInfo(){
 	)
 	return (
 		<>
-		<p>My wallet info</p>
+		<p>Connect your wallet, please</p>
 		</>
 	)
 }
