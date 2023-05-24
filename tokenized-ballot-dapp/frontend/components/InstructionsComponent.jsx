@@ -2,6 +2,11 @@ import styles from "../styles/InstructionsComponent.module.css";
 import Router, { useRouter } from "next/router";
 import { useSigner, useNetwork, useBalance } from 'wagmi';
 import { useState, useEffect } from 'react';
+import { VotingPower } from "./VotingPower";
+import { WinningProposal } from "./Winning";
+import { Voting } from "./Voting";
+import { Delegate } from "./Delegate";
+
 
 export default function InstructionsComponent() {
 	const router = useRouter();
@@ -16,7 +21,6 @@ export default function InstructionsComponent() {
 
 			<div className={styles.buttons_container}>
 				<PageBody></PageBody>
-				{/*<ApiInfo></ApiInfo>*/}
 			</div>
 			<div className={styles.footer}>
 				Group 4 - Weekend4 Project
@@ -45,6 +49,7 @@ function WalletInfo(){
 		<WalletBalance></WalletBalance>
 		<Voting></Voting>
 		<RequestTokens></RequestTokens>
+		<WinningProposal></WinningProposal>
 		</>
 	)
 	if(isLoading) return (
@@ -55,29 +60,6 @@ function WalletInfo(){
 	return (
 		<>
 		<p>Connect your wallet, please</p>
-		</>
-	)
-}
-
-function Voting(){
-	const {data: signer, isError, isLoading } = useSigner();
-	const { chain, chains } = useNetwork();
-	if(signer) return (
-		<>
-		<p><b>Voting:</b></p>
-		<button onClick={() => vote()}>Cast Vote</button>
-		<button onClick={() => delegate()}>Delegate Votes</button>
-		<VoteResults></VoteResults>
-		</>
-	)
-	if(isLoading) return (
-		<>
-		<p>Wait a while, the wallet is loading</p>
-		</>	
-	)
-	return (
-		<>
-		<p>My wallet info</p>
 		</>
 	)
 }
@@ -103,41 +85,7 @@ function WalletBalance(){
 	)
 }
 
-function VoteResults(){
-	
-}
 
-/*function signMessage(signer, message) {
-	signer.signMessage(message).then(
-		(response) => {console.log(response)},
-		(error) => {console.error(error)}
-	)
-}
-
-function ApiInfo() {
-	const [data, setData] = useState(null);
-	const [isLoading, setLoading] = useState(false);
-   
-	useEffect(() => {
-	  setLoading(true);
-	  fetch('https://random-data-api.com/api/v2/users')
-		.then((res) => res.json())
-		.then((data) => {
-		  setData(data);
-		  setLoading(false);
-		});
-	}, []);
-   
-	if (isLoading) return <p>Loading...</p>;
-	if (!data) return <p>No profile data</p>;
-   
-	return (
-	  <div>
-		<h1>{data.username}</h1>
-		<p>{data.email}</p>
-	  </div>
-	);
-  }*/
   
   function RequestTokens() {
 	  const { data: signer } = useSigner();

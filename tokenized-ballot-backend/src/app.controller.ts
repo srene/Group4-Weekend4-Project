@@ -32,9 +32,7 @@ export class AppController {
 
   @Post('request-tokens')
   requestTokens(@Body() body: RequestTokenDto){
-    console.log(body.address);
-    //if(!this.appService.checkSig(body.address,body.signature))
-    //  throw new ForbiddenException("Error");
+
     return this.appService.requestTokens(body.address);
   }
 }
