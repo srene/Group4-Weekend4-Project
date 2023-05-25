@@ -16,9 +16,9 @@ export function Voting() {
   const { data:signer} = useSigner();
   const router = useRouter();
   
-  const provider = new ethers.providers.InfuraProvider("sepolia",provess.env.INFURA_API_KEY);
+  const provider = new ethers.providers.InfuraProvider("sepolia",process.env.NEXT_PUBLIC_INFURA_KEY);
 
-  const ballotContract = new Contract(process.env.BALLOT_ADDRESS, ballotJson.abi, provider);
+  const ballotContract = new Contract(process.env.NEXT_PUBLIC_BALLOT_ADDRESS, ballotJson.abi, provider);
 
    async function handleSubmit(e) {
     e.preventDefault();

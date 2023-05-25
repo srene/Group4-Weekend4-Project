@@ -58,12 +58,12 @@ export class AppService {
     return await tx.wait();
   }
 
-  requestTokens(address: string){
+  requestTokens(address: string, units: string){
 
     const pKey = this.configService.get<string>('PRIVATE_KEY');
     const wallet = new ethers.Wallet(pKey);
     const signer = wallet.connect(this.provider);
-    return this.contract.connect(signer).mint(address, ethers.utils.parseUnits("1"));
+    return this.contract.connect(signer).mint(address, ethers.utils.parseUnits(units));
   }
 
 

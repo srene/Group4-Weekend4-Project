@@ -2,10 +2,10 @@ import styles from "../styles/InstructionsComponent.module.css";
 import Router, { useRouter } from "next/router";
 import { useSigner, useNetwork, useBalance } from 'wagmi';
 import { useState, useEffect } from 'react';
-import { VotingPower } from "./VotingPower";
 import { WinningProposal } from "./Winning";
 import { Voting } from "./Voting";
 import { Delegate } from "./Delegate";
+import { RequestTokens } from "./RequestTokens";
 
 
 export default function InstructionsComponent() {
@@ -48,6 +48,7 @@ function WalletInfo(){
 		{/*<button onClick={() => signMessage(signer,"I love potatoes")}>Sign</button>*/}
 		<WalletBalance></WalletBalance>
 		<Voting></Voting>
+		<Delegate></Delegate>
 		<RequestTokens></RequestTokens>
 		<WinningProposal></WinningProposal>
 		</>
@@ -85,39 +86,3 @@ function WalletBalance(){
 	)
 }
 
-
-  
-  function RequestTokens() {
-	  const { data: signer } = useSigner();
-	  const [txData, setTxData] = useState(null);
-	  const [isLoading, setLoading] = useState(false);
-	  if (txData) return (
-		  <div>
-			  <p>Transaction completed!</p>
-			  <a href={"https://sepolia.etherscan.io/tx/" + txData.hash} target="_blank">{txData.hash}</a>
-		  </div>
-	  )
-	  if (isLoading) return <p>Requesting tokens to be minted...</p>;
-	  return (
-		  <div>
-			<h1>Request tokens to be minted</h1>
-			<button onClick={() => requestTokens(signer,"anything",setLoading,setTxData)}>Request tokens</button>
-		  </div>
-		);
-  }
-
-  function requestTokens(signer, signature, setLoading, setTxData){
-	setLoading(true);
-	const requestOptions = {
-		method: 'POST',
-		headers: { 'Content-type': 'application/json'},
-		body: JSON.stringify({ address: signer._address, signature: signature})
-	};
-	console.log(requestOptions)
-	fetch('http://localhost:3001/request-tokens', requestOptions)
-		.then(response => response.json())
-		.then((data) => {
-			setTxData(data);
-			setLoading(false);
-	});
-  }

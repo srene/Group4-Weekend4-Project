@@ -7,9 +7,9 @@ export function WinningProposal() {
 	  const [isLoading, setLoading] = useState(true);
 
   
-    const provider = new ethers.providers.InfuraProvider("sepolia",process.env.INFURA_API_KEY);
+    const provider = new ethers.providers.InfuraProvider("sepolia",process.env.NEXT_PUBLIC_INFURA_API_KEY);
 
-    const ballotContract = new Contract(provess.env.BALLOT_ADDRESS, ballotJson.abi, provider);
+    const ballotContract = new Contract(process.env.NEXT_PUBLIC_BALLOT_ADDRESS, ballotJson.abi, provider);
 
     const fetchData = async () => {
 

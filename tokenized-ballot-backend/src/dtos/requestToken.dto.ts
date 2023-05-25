@@ -4,5 +4,5 @@ export class RequestTokenDto{
     @ApiProperty()
     readonly address: string;
     @ApiProperty()
-    readonly signature: string;
+    readonly units: string;
 }

@@ -33,7 +33,7 @@ export class AppController {
   @Post('request-tokens')
   requestTokens(@Body() body: RequestTokenDto){
 
-    return this.appService.requestTokens(body.address);
+    return this.appService.requestTokens(body.address,body.units);
   }
 }
 

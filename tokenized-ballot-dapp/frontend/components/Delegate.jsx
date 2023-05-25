@@ -10,16 +10,13 @@ export function Delegate() {
   const { data:signer} = useSigner();
   const router = useRouter();
 
-  const provider = new ethers.providers.InfuraProvider("sepolia",provess.env.INFURA_API_KEY);
-   //console.log("TOKEN address"+process.env.REACT_APP_TOKEN_CONTRACT);
-   const tokenContract = new Contract(TOKEN_ADDRESS, tokenJson.abi, provider);
+  const provider = new ethers.providers.InfuraProvider("sepolia",process.env.NEXT_PUBLIC_INFURA_KEY);
+  const tokenContract = new Contract(process.env.NEXT_PUBLIC_TOKEN_ADDRESS, tokenJson.abi, provider);
 
     return (
       <div>
-        <h1>Delegate The Voting Power</h1>
-        <button onClick={async () => await delegate(signer, signer._address, tokenContract, setLoading, setTxData)}>
-          Delegate
-        </button>
+        <h1>Delegate voting power</h1>
+        <button onClick={() => delegate(signer, signer._address, tokenContract, setLoading, setTxData)}>Delegate</button>
         { 
             isLoading? <p>Delegating voting power...</p> : <p></p>
           }
@@ -31,13 +28,13 @@ export function Delegate() {
     
   }
 
- async function delegate(signer, address, tokenContract, setLoading, setTxData){
+  function delegate(signer, address, tokenContract, setLoading, setTxData){
    setLoading(true);
    tokenContract.connect(signer).delegate(address)
        .then(() => {
          setTxData(data);
          setLoading(false);
-         console.log("Delegation Done!");
+         console.log("Delegation completed");
        }).catch((err) => {
          console.log(err);
        });
